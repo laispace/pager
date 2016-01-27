@@ -1,0 +1,16 @@
+.buluo-AvatarCard {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  img {
+    max-width: 100%;
+  }
+
+  .title {
+    margin: 5px auto 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

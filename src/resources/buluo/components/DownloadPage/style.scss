@@ -1,0 +1,58 @@
+html{
+  font-family: -apple-system-font, "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+}
+.buluo-DownloadPage {
+  text-align: center;
+  background: #fae100;
+  .logo {
+    margin-top: 100px;
+    //margin-bottom: 115px;
+    margin-bottom: 130px;
+    width: 172px;
+    height: 166px;
+  }
+
+  .download-btn {
+    display: block;
+    width: 245px;
+    height: 50px;
+    line-height: 50px;
+    margin: 25px auto;
+    border-radius: 5px;
+    background: #333333;
+    text-decoration: none;
+    color: #fff;
+    &:before {
+      display: inline-block;
+      content: '';
+      margin-right: 19px;
+      vertical-align: sub;
+    }
+    &.iphone:before {
+      background: url('./iphone-icon.png') no-repeat center center;
+      width: 21px;
+      height: 20px;
+      background-size: 21px 20px;
+    }
+    &.android:before {
+      background: url('./android-icon.png') no-repeat center center;
+      width: 21px;
+      height: 23px;
+      background-size: 21px 23px;
+    }
+  }
+
+  @media all and (max-height: 568px) {
+    .logo {
+      margin-top: 70px;
+      margin-bottom: 100px;
+    }
+  }
+  @media all and (max-height: 480px) {
+    .logo {
+      margin-top: 40px;
+      margin-bottom: 70px;
+    }
+  }
+}
+

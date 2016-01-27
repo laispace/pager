@@ -1,0 +1,12 @@
+.buluo-AvatarCard a {
+  text-decoration: none;
+  color: inherit; }
+.buluo-AvatarCard img {
+  max-width: 100%; }
+.buluo-AvatarCard .title {
+  margin: 5px auto 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+/*# sourceMappingURL=style.css.map */

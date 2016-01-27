@@ -1,0 +1,47 @@
+{
+  "description": "下载页面",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Main.js",
+
+  "props": {
+    "logo": "http://pub.idqqimg.com/qqun/xiaoqu/mobile/img/app-logo-with-text.png",
+    "backgroundColor": "#fae100",
+    "btnBackgroundColor": "#000",
+    "androidText": "Android 下载",
+    "androidUrl": "http://laispace.com",
+    "iOSText": "iPhone 下载",
+    "iOSUrl": "http://laispace.com"
+  },
+
+  "properties": {
+    "logo": {
+      "type": "string",
+      "title": "Logo 地址"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "title": "页面背景颜色"
+    },
+    "btnBackgroundColor": {
+      "type": "string",
+      "title": "按钮背景颜色"
+    },
+    "androidText": {
+      "type": "string",
+      "title": "Android 下载文案"
+    },
+    "androidUrl": {
+      "type": "string",
+      "title": "Android 下载地址"
+    },
+    "iOSText": {
+      "type": "string",
+      "title": "iOS 下载文案"
+    },
+    "iOSUrl": {
+      "type": "string",
+      "title": "iOS 下载文案"
+    }
+  }
+}

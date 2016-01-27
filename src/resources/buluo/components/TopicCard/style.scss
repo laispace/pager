@@ -1,0 +1,49 @@
+.buluo-AvatarCard {
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .card-wrap {
+    display: block;
+    padding: 10px;
+    background: #eee;
+    text-decoration: none;
+    color: inherit;
+    .img-wrap {
+      position: relative;
+      img {
+        display: block;
+        width: 100%;
+      }
+      .link-img-text-wrap {
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, .6);
+        font-size: 24px;
+        line-height: 50px;
+        color: #fff;
+
+        .link-img-text {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+    .link-text-wrap {
+      padding: 15px 10px;
+      background: #fff;
+     .link-text {
+       white-space: nowrap;
+       text-overflow: ellipsis;
+       overflow: hidden;
+       font-weight: bold;
+       color: #000;
+     }
+    }
+  }
+}

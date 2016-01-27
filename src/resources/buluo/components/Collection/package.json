@@ -1,0 +1,88 @@
+{
+  "description": "横向轮播",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Main.js",
+  "props": {
+    "collections": [
+      {
+        "title": "二次元空间",
+        "bids": [
+          {
+            "name": "萌娘百科",
+            "bid": 206624,
+            "pic_url": "http://p.qlogo.cn/gbar_heads/Q3auHgzwzM7tURZN9nM1jR8GUTmj1gicic7rqrKJoJnjqjGysKPnVHiaQ/"
+          },
+          {
+            "name": "诱宵美九",
+            "bid": 211754,
+            "pic_url": "http://p.qlogo.cn/gbar_heads/Q3auHgzwzM6DpULhv75miaCJGoWbiadsuWu3Bic6SjrUkNuSLMticDib4Pg/"
+          },
+          {
+            "name": "爱漫画",
+            "bid": 11464,
+            "pic_url": "http://p.qlogo.cn/gbar_heads/Q3auHgzwzM4mlxIicO46qqRa7icb3I4XYnWvPSypYH73p3mMmMXJaBSg/"
+          },
+          {
+            "name": "柯南",
+            "bid": 10196,
+            "pic_url": "http://p.qpic.cn/qqconadmin/0/9a6bc9325c864c72a4c7bc4c8dd75838/0"
+          },
+          {
+            "name": "ACG绘画",
+            "bid": 16569,
+            "pic_url": "http://p.qpic.cn/qqconadmin/0/a6ee75a998d6488fae657dc5c6ad6f4c/0"
+          },
+          {
+            "name": "二次元马戏团",
+            "bid": 272114,
+            "pic_url": "http://p.qlogo.cn/gbar_heads/Q3auHgzwzM7b4MAe2CG1opb4PeYOS6GysLF38NZD1vXlw9BZn4NolA/"
+          }
+        ]
+      }
+    ]
+  },
+  "properties": {
+    "collections":{
+      "type": "array",
+      "title": "收藏集列表",
+      "items": {
+        "type": "object",
+        "title": "收藏集",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "名字",
+            "default": "收藏集"
+          },
+          "bids": {
+            "type": "array",
+            "title": "部落列表",
+            "format": "table",
+            "items": {
+              "type": "object",
+              "title": "部落",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "名字",
+                  "default": "萌娘百科"
+                },
+                "bid": {
+                  "type": "number",
+                  "description": "部落 id",
+                  "default": 206624
+                },
+                "pic_url": {
+                  "type": "string",
+                  "description": "头像地址",
+                  "default": "http://p.qlogo.cn/gbar_heads/Q3auHgzwzM7tURZN9nM1jR8GUTmj1gicic7rqrKJoJnjqjGysKPnVHiaQ/"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

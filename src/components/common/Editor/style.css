@@ -1,0 +1,15 @@
+#editor-holder [data-schemaid="root"] > h3 {
+  display: none; }
+#editor-holder [data-schemaid="root"] .panel {
+  padding: 10px; }
+  #editor-holder [data-schemaid="root"] .panel .form-control p {
+    margin-top: 0 !important;
+    font-style: inherit !important;
+    color: #aaa; }
+  #editor-holder [data-schemaid="root"] .panel td {
+    vertical-align: initial; }
+
+.editor-slider-wrap {
+  margin-right: 20px; }
+
+/*# sourceMappingURL=style.css.map */

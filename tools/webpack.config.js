@@ -1,0 +1,209 @@
+import path from 'path';
+import webpack from 'webpack';
+import merge from 'lodash.merge';
+
+const DEBUG = !process.argv.includes('--release');
+const VERBOSE = process.argv.includes('--verbose');
+const WATCH = global.WATCH === undefined ? false : global.WATCH;
+const AUTOPREFIXER_BROWSERS = [
+  'Android 2.3',
+  'Android >= 4',
+  'Chrome >= 35',
+  'Firefox >= 31',
+  'Explorer >= 9',
+  'iOS >= 7',
+  'Opera >= 12',
+  'Safari >= 7.1',
+];
+const GLOBALS = {
+  'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
+  __DEV__: DEBUG,
+};
+const JS_LOADER = {
+  test: /\.jsx?$/,
+  include: [
+    path.resolve(__dirname, '../src'),
+  ],
+  exclude: ['node_modules'],
+  loader: 'babel-loader',
+};
+
+//
+// Common configuration chunk to be used for both
+// client-side (app.js) and server-side (server.js) bundles
+// -----------------------------------------------------------------------------
+
+const config = {
+  output: {
+    publicPath: '/',
+    sourcePrefix: '  ',
+  },
+
+  cache: DEBUG,
+  debug: DEBUG,
+
+  stats: {
+    colors: true,
+    reasons: DEBUG,
+    hash: VERBOSE,
+    version: VERBOSE,
+    timings: true,
+    chunks: VERBOSE,
+    chunkModules: VERBOSE,
+    cached: VERBOSE,
+    cachedAssets: VERBOSE,
+  },
+
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+  ],
+
+  resolve: {
+    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx'],
+  },
+
+  module: {
+    loaders: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      }, {
+        test: /\.txt$/,
+        loader: 'raw-loader',
+      }, {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        loader: 'url-loader',
+      }, {
+        test: /\.(eot|ttf|wav|mp3)$/,
+        loader: 'file-loader',
+      },
+    ],
+  },
+
+  postcss: function plugins(bundler) {
+    return [
+      require('postcss-import')({ addDependencyTo: bundler }),
+      require('postcss-nested')(),
+      require('postcss-cssnext')({ autoprefixer: AUTOPREFIXER_BROWSERS }),
+    ];
+  },
+};
+
+//
+// Configuration for the client-side bundle (app.js)
+// -----------------------------------------------------------------------------
+
+const appConfig = merge({}, config, {
+  entry: [
+    ...(WATCH ? ['webpack-hot-middleware/client'] : []),
+    './src/app.js',
+  ],
+  output: {
+    path: path.join(__dirname, '../build/public'),
+    filename: 'app.js',
+  },
+
+  // Choose a developer tool to enhance debugging
+  // http://webpack.github.io/docs/configuration.html#devtool
+  devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
+  plugins: [
+    ...config.plugins,
+    new webpack.DefinePlugin(GLOBALS),
+    ...(!DEBUG ? [
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: VERBOSE,
+        },
+      }),
+      new webpack.optimize.AggressiveMergingPlugin(),
+    ] : []),
+    ...(WATCH ? [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+    ] : []),
+  ],
+  module: {
+    loaders: [
+      WATCH ? {
+        ...JS_LOADER,
+        query: {
+          // Wraps all React components into arbitrary transforms
+          // https://github.com/gaearon/babel-plugin-react-transform
+          plugins: ['react-transform'],
+          extra: {
+            'react-transform': {
+              transforms: [
+                {
+                  transform: 'react-transform-hmr',
+                  imports: ['react'],
+                  locals: ['module'],
+                }, {
+                  transform: 'react-transform-catch-errors',
+                  imports: ['react', 'redbox-react'],
+                },
+              ],
+            },
+          },
+        },
+      } : JS_LOADER,
+      ...config.module.loaders,
+      {
+        test: /\.scss$/,
+        loader: 'style-loader/useable!css-loader!sass-loader!postcss-loader',
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader/useable!css-loader!postcss-loader',
+      },
+    ],
+  },
+});
+
+//
+// Configuration for the server-side bundle (server.js)
+// -----------------------------------------------------------------------------
+
+const serverConfig = merge({}, config, {
+  entry: './src/server.js',
+  output: {
+    path: './build',
+    filename: 'server.js',
+    libraryTarget: 'commonjs2',
+  },
+  target: 'node',
+  externals: [
+    function filter(context, request, cb) {
+      const isExternal = request.match(/^[a-z][a-z\/\.\-0-9]*$/i);
+      cb(null, Boolean(isExternal));
+    },
+  ],
+  node: {
+    console: false,
+    global: false,
+    process: false,
+    Buffer: false,
+    __filename: false,
+    __dirname: false,
+  },
+  devtool: 'source-map',
+  plugins: [
+    ...config.plugins,
+    new webpack.WatchIgnorePlugin([path.resolve(__dirname, '../src/components/PublishPage/app.js')]),
+    new webpack.DefinePlugin(GLOBALS),
+    new webpack.BannerPlugin('require("source-map-support").install();',
+      { raw: true, entryOnly: false }),
+  ],
+  module: {
+    loaders: [
+      JS_LOADER,
+      ...config.module.loaders,
+      {
+        test: /\.css$/,
+        loader: 'css-loader!postcss-loader',
+      },
+    ],
+  },
+});
+
+export default [appConfig, serverConfig];

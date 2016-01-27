@@ -1,0 +1,52 @@
+{
+  "name": "pager-common-carousel",
+  "description": "图片跳转",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Main.js",
+  "props": {
+    "imgs": [
+      {
+        "link": "http://11.332.com",
+        "src": "http://pub.idqqimg.com/qqun/xiaoqu/mobile/huodong/buluo/bls11/img/5ELSGRDyF9CEn0sEE497SwD2.jpg"
+      }
+    ]
+  },
+  "properties": {
+    "imgs": {
+      "type": "array",
+      "title": "图片列表",
+      "format": "table",
+      "items": {
+        "type": "object",
+        "title": "图片",
+        "properties": {
+          "link": {
+            "type": "string",
+            "description": "点击图片的跳转链接",
+            "default": "http://qq.com/"
+          },
+          "src": {
+            "type": "string",
+            "description": "图片地址",
+            "default": "http://pub.idqqimg.com/qqun/xiaoqu/mobile/huodong/buluo/bls11/img/5ELSGRDyF9CEn0sEE497SwD2.jpg"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "pager",
+    "carousel",
+    "slide",
+    "slick"
+  ],
+  "author": "laispace",
+  "license": "MIT",
+  "dependencies": {
+  }
+}

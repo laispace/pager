@@ -1,0 +1,200 @@
+@charset "utf-8";
+
+$dash-border-color: #ccc;
+$bg-color: #f8e12e;
+
+html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Microsoft YaHei";
+
+  height: 100%;
+  background: $bg-color;
+  #js_bar_qrcode {
+    height: 100%;
+    margin-bottom: 132px;
+    background: url("http://pub.idqqimg.com/qqun/xiaoqu/mobile/img/qrcode-bg2.png") no-repeat center bottom;
+  }
+  .wrapper {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 50px;
+    .logo {
+      position: relative;
+      display: block;
+      width: 270px;
+      margin: 0 auto;
+      img {
+        width: 172px;
+        height: 166px;
+        display: block;
+        margin: 0 auto;
+        border: 0;
+        vertical-align: middle;
+      }
+
+      a {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 90px;
+        height: 75px;
+        background: #fff;
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+    }
+
+    .qr-container {
+      position: relative;
+      margin: 60px auto 0;
+      width: 270px;
+      height: auto;
+      overflow: hidden;
+      // padding: 25px 27px 25px 25px;
+      background-color: #fff;
+      // border: 1px dashed #30A1F2;
+      border-radius: 5px;
+
+      .qr {
+        position: relative;
+        background: #fff;
+        padding: 16px 24px 24px;
+        // border: 1px dashed $dash-border-color;
+        border-top: none;
+        border-bottom: none;
+        img {
+          border: 0;
+          vertical-align: middle;
+        }
+        .app-logo-wrapper {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 60px;
+          height: 60px;
+          -webkit-transform: translate(-30px, -30px);
+          transform: translate(-30px, -30px);
+          background: #fff;
+          .app-logo {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 10px;
+          }
+        }
+
+
+        #qrcode {
+          width: 222px;
+          height: 222px;
+        }
+      }
+      .qr-word {
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+        width: 100%;
+        padding-bottom: 24px;
+        // border: 1px dashed $dash-border-color;
+        border-top: none;
+      }
+
+      .cover-wrapper {
+        padding: 24px 24px 16px;
+        // border: 1px dashed $dash-border-color;
+        border-bottom: none;
+        &:after {
+          content: '';
+          display: block;
+          clear: both;
+        }
+        .avatar {
+          float: left;
+          margin-right: 10px;
+          width: 40px;
+          height: 40px;
+          border-radius: 2px;
+        }
+        .bar-info-wrapper {
+          float: left;
+          // padding-top: 5px;
+          .name {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            font-size: 18px;
+            color: #000;
+            margin-bottom: 8px;
+            max-width: 170px;
+          }
+          .counts {
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            color: #808080;
+            .separator {
+              padding: 0 10px;
+              vertical-align: text-top;
+            }
+          }
+        }
+      }
+
+      .divider {
+        position: relative;
+        $size: 16px;
+        border-bottom: 1px dashed $dash-border-color;
+        height: 1px;
+        margin: $size/2 0;
+        &:before,
+        &:after {
+          content: '';
+          display: block;
+          width: $size;
+          height: $size;
+          position: absolute;
+          top: -$size/2;
+          // border-color: $dash-border-color;
+          // border-style: solid;
+          // border-width: 1px;
+          background: $bg-color;
+        }
+        &:before {
+          left: -$size/2;
+          border-radius: 0 $size/2 $size/2 0;
+          border-left-width: 0;
+        }
+        &:after {
+          right: -$size/2;
+          border-radius: $size/2 0 0 $size/2;
+          border-right-width: 0;
+        }
+      }
+    }
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 50px 0;
+    margin: 0 auto;
+    color: #333;
+    text-align: center;
+  }
+}
+
+
+
+
+

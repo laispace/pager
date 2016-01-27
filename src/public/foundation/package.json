@@ -1,0 +1,123 @@
+{
+  "_args": [
+    [
+      "foundation-sites@5.5.3",
+      "/Users/lai/code/pager"
+    ]
+  ],
+  "_cnpm_publish_time": 1444156224149,
+  "_from": "foundation-sites@5.5.3",
+  "_id": "foundation-sites@5.5.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/foundation-sites",
+  "_nodeVersion": "4.1.2",
+  "_npmUser": {
+    "email": "arthur@zurb.com",
+    "name": "arthurzurb"
+  },
+  "_npmVersion": "2.14.4",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "foundation-sites",
+    "raw": "foundation-sites@5.5.3",
+    "rawSpec": "5.5.3",
+    "scope": null,
+    "spec": "5.5.3",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/foundation-sites/download/foundation-sites-5.5.3.tgz",
+  "_shasum": "6556eb2b31cde3b226630116bd215d95d056c0a7",
+  "_shrinkwrap": null,
+  "_spec": "foundation-sites@5.5.3",
+  "_where": "/Users/lai/code/pager",
+  "bugs": {
+    "url": "https://github.com/zurb/foundation/issues"
+  },
+  "dependencies": {},
+  "description": "[![Build Status](https://travis-ci.org/zurb/foundation.svg)](https://travis-ci.org/zurb/foundation)",
+  "devDependencies": {
+    "assemble": "~0.4.37",
+    "grunt": "~0.4.4",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-compress": "~0.7.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "^0.12.2",
+    "grunt-contrib-jasmine": "~0.6.3",
+    "grunt-contrib-jst": "~0.5.1",
+    "grunt-contrib-sass": "~0.8.1",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-karma": "~0.6.2",
+    "grunt-newer": "~0.7.0",
+    "grunt-rsync": "~0.2.1",
+    "grunt-string-replace": "~0.2.7",
+    "handlebars-helper-rel": "~0.1.2",
+    "handlebars-helper-slugify": "~0.2.0",
+    "highlight.js": "~7.3.0",
+    "jasmine-jquery": "github:imtapps/node-jasmine-jquery",
+    "karma": "~0.10.4",
+    "karma-browserstack-launcher": "0.0.4",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-ie-launcher": "~0.1.1",
+    "karma-jasmine": "~0.1.3",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma-safari-launcher": "~0.1.1",
+    "karma-script-launcher": "~0.1.0",
+    "load-grunt-config": "~0.16.0"
+  },
+  "directories": {},
+  "dist": {
+    "noattachment": false,
+    "shasum": "6556eb2b31cde3b226630116bd215d95d056c0a7",
+    "size": 1348085,
+    "tarball": "http://registry.npm.taobao.org/foundation-sites/download/foundation-sites-5.5.3.tgz"
+  },
+  "gitHead": "b879716aa268e1f88fe43de98db2db4487af00ca",
+  "homepage": "https://github.com/zurb/foundation",
+  "keywords": [
+    "handlebars-helper-rel",
+    "handlebars-helper-slugify"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/zurb/foundation/blob/master/LICENSE"
+    }
+  ],
+  "main": "js/foundation/foundation.js",
+  "maintainers": [
+    {
+      "name": "arthurzurb",
+      "email": "arthur@zurb.com"
+    },
+    {
+      "name": "eddiedean",
+      "email": "christopher.oyler@gmail.com"
+    },
+    {
+      "name": "gakimball",
+      "email": "geoff@zurb.com"
+    }
+  ],
+  "name": "foundation-sites",
+  "optionalDependencies": {},
+  "publish_time": 1444156224149,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zurb/foundation.git"
+  },
+  "scripts": {
+    "start": "grunt"
+  },
+  "version": "5.5.3"
+}

@@ -1,0 +1,78 @@
+{
+  "description": "头像卡片列表",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Main.js",
+
+  "props": {
+    "imgWidth": "60px",
+    "imgHeight": "60px",
+    "imgCountsPerLine": 4,
+    "imgs": [
+      {
+        "link": "http://11.332.com",
+        "src": "https://s-media-cache-ak0.pinimg.com/736x/f5/c3/95/f5c39586fa787a5b1f210ada6f584b24.jpg",
+        "title": "名字"
+      },
+      {
+        "link": "http://11.332.com",
+        "src": "https://s-media-cache-ak0.pinimg.com/736x/f5/c3/95/f5c39586fa787a5b1f210ada6f584b24.jpg",
+        "title": "名字"
+      },
+      {
+        "link": "http://11.332.com",
+        "src": "https://s-media-cache-ak0.pinimg.com/736x/f5/c3/95/f5c39586fa787a5b1f210ada6f584b24.jpg",
+        "title": "名字"
+      },
+      {
+        "link": "http://11.332.com",
+        "src": "https://s-media-cache-ak0.pinimg.com/736x/f5/c3/95/f5c39586fa787a5b1f210ada6f584b24.jpg",
+        "title": "名字"
+      }
+    ]
+  },
+
+  "properties": {
+    "imgWidth": {
+      "type": "string",
+      "title": "头像宽度",
+      "default": "60px"
+    },
+    "imgHeight": {
+      "type": "string",
+      "title": "头像高度",
+      "default": "60px"
+    },
+    "imgCountsPerLine": {
+      "type": "number",
+      "title": "每行几个卡片",
+      "default": 4
+    },
+    "imgs": {
+      "type": "array",
+      "title": "卡片列表",
+      "format": "table",
+      "items": {
+        "type": "object",
+        "title": "卡片",
+        "properties": {
+          "link": {
+            "type": "string",
+            "description": "跳转链接",
+            "default": "http://qq.com/"
+          },
+          "src": {
+            "type": "string",
+            "description": "头像地址",
+            "default": "https://s-media-cache-ak0.pinimg.com/736x/f5/c3/95/f5c39586fa787a5b1f210ada6f584b24.jpg"
+          },
+          "title": {
+            "type": "string",
+            "description": "文案",
+            "default": "11111"
+          }
+        }
+      }
+    }
+  }
+}

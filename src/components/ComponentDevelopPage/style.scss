@@ -1,0 +1,19 @@
+html, body {
+  font-size: 10px;
+}
+.ComponentDevelopPage {
+
+  .resizable-box {
+    position: relative;
+  }
+
+  .component {
+    position: relative;
+    border: 1px solid lightblue;
+    overflow-y: auto;
+  }
+
+}
+#editor-holder {
+  overflow-y: auto;
+}

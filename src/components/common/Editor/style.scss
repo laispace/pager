@@ -1,0 +1,25 @@
+#editor-holder {
+  [data-schemaid="root"] {
+    > h3 {
+      display: none;
+    }
+
+    .panel {
+      padding: 10px;
+      .form-control {
+        p {
+          margin-top: 0 !important;
+          font-style: inherit !important;
+          color: #aaa;
+        }
+      }
+
+      td {
+        vertical-align: initial;
+      }
+    }
+  }
+}
+.editor-slider-wrap {
+  margin-right: 20px;
+}

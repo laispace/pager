@@ -1,0 +1,59 @@
+.buluo-Collection {
+  .collection {
+    position: relative;
+    background-color: #fff;
+    margin: 25px 0;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      margin-left: 15px;
+      display: -webkit-box;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling : touch;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    li {
+      margin-right: 15px;
+    }
+    h2 {
+      margin-left: 15px;
+      font-size: 16px;
+      margin-bottom: 16px;
+      -webkit-box-flex: 1;
+      position: relative;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: -15px;
+        content: '';
+        width: 4px;
+        height: 16px;
+        background-color: #f48175;
+      }
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      background-color: #efece9;
+      -webkit-tap-highlight-color: transparent;
+      border: 1px solid #c8c7cc;
+    }
+
+    p {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 12px;
+      margin-top: 12px;
+      text-align: center;
+      width: 80px;
+    }
+  }
+}

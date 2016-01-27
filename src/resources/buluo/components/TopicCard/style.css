@@ -1,0 +1,40 @@
+.buluo-AvatarCard p {
+  margin: 0;
+  padding: 0; }
+.buluo-AvatarCard .card-wrap {
+  display: block;
+  padding: 10px;
+  background: #eee;
+  text-decoration: none;
+  color: inherit; }
+  .buluo-AvatarCard .card-wrap .img-wrap {
+    position: relative; }
+    .buluo-AvatarCard .card-wrap .img-wrap img {
+      display: block;
+      width: 100%; }
+    .buluo-AvatarCard .card-wrap .img-wrap .link-img-text-wrap {
+      width: 100%;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 24px;
+      line-height: 50px;
+      color: #fff; }
+      .buluo-AvatarCard .card-wrap .img-wrap .link-img-text-wrap .link-img-text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-weight: bold;
+        color: #fff; }
+  .buluo-AvatarCard .card-wrap .link-text-wrap {
+    padding: 15px 10px;
+    background: #fff; }
+    .buluo-AvatarCard .card-wrap .link-text-wrap .link-text {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-weight: bold;
+      color: #000; }
+
+/*# sourceMappingURL=style.css.map */

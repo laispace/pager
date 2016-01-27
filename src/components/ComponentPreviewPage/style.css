@@ -1,0 +1,14 @@
+html, body {
+  font-size: 10px; }
+
+.ComponentDevelopPage-container .resizable-box {
+  position: relative; }
+.ComponentDevelopPage-container .component {
+  position: relative;
+  border: 1px solid lightblue;
+  overflow-y: auto; }
+
+#editor-holder {
+  overflow-y: auto; }
+
+/*# sourceMappingURL=style.css.map */

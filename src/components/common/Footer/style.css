@@ -1,0 +1,39 @@
+.Footer {
+  background: #333;
+  color: #fff;
+}
+
+.Footer-container {
+  margin: 0 auto;
+  padding: 20px 15px;
+  text-align: center;
+}
+
+.Footer-text {
+  color: rgba(255, 255, 255, .5);
+}
+
+.Footer-text--muted {
+  color: rgba(255, 255, 255, .3);
+}
+
+.Footer-spacer {
+  color: rgba(255, 255, 255, .3);
+}
+
+.Footer-text,
+.Footer-link {
+  padding: 2px 5px;
+  font-size: 1em;
+}
+
+.Footer-link,
+.Footer-link:active,
+.Footer-link:visited {
+  color: rgba(255, 255, 255, .6);
+  text-decoration: none;
+}
+
+.Footer-link:hover {
+  color: rgba(255, 255, 255, 1);
+}
