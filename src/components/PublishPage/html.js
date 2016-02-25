@@ -46,6 +46,11 @@ class Html extends Component {
         })
       }
       <script dangerouslySetInnerHTML={{__html: extraProps.script}}></script>
+
+      <!-- TA 分析 pager.laispace.com -->
+      <script type="text/javascript" src="http://tajs.qq.com/stats?sId=54598868" charset="UTF-8"></script>
+      <!-- /TA 分析 请修改替换 -->
+
       </body>
       </html>
     );

@@ -39,7 +39,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <AppBar title="Pxxx" onLeftIconButtonTouchTap={this.showLeftNavigation}
+        <AppBar title="Pager" onLeftIconButtonTouchTap={this.showLeftNavigation}
           iconElementRight={
             <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
               <MenuItem primaryText="刷新" />
