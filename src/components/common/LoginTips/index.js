@@ -13,7 +13,7 @@ class LoginTips extends Component {
   render() {
     return (
       <div>
-       请登陆11
+       请登陆！（天呐~这里怎么这么丑）
       </div>
     );
   }

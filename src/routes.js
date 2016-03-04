@@ -90,20 +90,20 @@ class Routes extends Component {
       <Router>
         <Route path="/" component={HomePage}></Route>
         <Route path="/login" component={LoginPage}></Route>
-        <Route path="/users" component={UsersPage}></Route>
-        <Route path="/users/:id" component={UserPage}/>
+        <Route path="/users" onEnter={this.checkLogin} component={UsersPage}></Route>
+        <Route path="/users/:id" onEnter={this.checkLogin} component={UserPage}/>
 
-        <Route path="/projects" component={ProjectsPage}></Route>
+        <Route path="/projects" onEnter={this.checkLogin} component={ProjectsPage}></Route>
 
-        <Route path="/components" component={ComponentsPage}></Route>
+        <Route path="/components" onEnter={this.checkLogin} component={ComponentsPage}></Route>
 
-        <Route path="/pages" component={PagesPage}></Route>
-        <Route path="/pages/:id" component={PagePage}/>
+        <Route path="/pages" onEnter={this.checkLogin} component={PagesPage}></Route>
+        <Route path="/pages/:id" onEnter={this.checkLogin} component={PagePage}/>
 
-        <Route path="/preview/:id" component={PagePreviewPage}/>
+        <Route path="/preview/:id" onEnter={this.checkLogin} component={PagePreviewPage}/>
 
-        <Route path="/develop/:project/:path" component={ComponentDevelopPage}/>
-        <Route path="/componentPreview/:project/:path" component={ComponentPreviewPage}/>
+        <Route path="/develop/:project/:path" onEnter={this.checkLogin} component={ComponentDevelopPage}/>
+        <Route path="/componentPreview/:project/:path" onEnter={this.checkLogin} component={ComponentPreviewPage}/>
 
         <Route path="*" component={NotFoundPage}/>
 
