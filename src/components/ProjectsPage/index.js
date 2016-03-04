@@ -2,9 +2,12 @@ import React, { PropTypes, Component } from 'react';
 import styles from './style.css';
 import _ from 'lodash';
 import { FlatButton, Dialog, TextField, Snackbar} from 'material-ui';
-import { Table, TableBody, TableHeader,TableHeaderColumn, TableFooter, TableRow, TableRowColumn} from 'material-ui/lib/table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableFooter, TableRow, TableRowColumn} from 'material-ui/lib/table';
+import SelectField from 'material-ui/lib/select-field';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
+import LoginTips from '../common/LoginTips';
 
 const emptyProject = {
   name: '',
@@ -42,7 +45,7 @@ class Page extends Component {
       selectedProjectIndex: -1,
 
       dialogType: 'create', // create/update
-      project: emptyProject,
+      project: emptyProject
     };
     this.getProjects();
   }
@@ -68,12 +71,17 @@ class Page extends Component {
   }
 
   showCreateProjectDialog = () => {
+    // set default owner to current user
+    if (window.user) {
+      emptyProject.owner = window.user._id;
+    }
     this.setState({
       dialogType: 'create',
       project: emptyProject
     });
     this.showProjectDialog();
   }
+
   showUpdateProjectDialog = () => {
     const selectedProjectIndex = this.state.selectedProjectIndex;
     const project = _.cloneDeep(this.state.projects[selectedProjectIndex]);
@@ -95,7 +103,6 @@ class Page extends Component {
       showProjectDialog: false
     });
   }
-
 
   createProject = async () => {
     try {
@@ -144,7 +151,7 @@ class Page extends Component {
         this.setState({
           projects: projects,
           showProjectDialog: false
-        })
+        });
         this.showSnackbar('更新成功');
       }
     } catch (error) {
@@ -163,7 +170,11 @@ class Page extends Component {
         const selectedProjectId = selectedProject._id;
         try {
           const res = await fetch(`/api/projects/${selectedProjectId}`, {
-            method: 'delete'
+            method: 'delete',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
           });
           const json = await res.json();
           if (json.retcode === 0) {
@@ -181,7 +192,6 @@ class Page extends Component {
       }
     }
   }
-
 
   handleRowSelection = (selectedRows) => {
     if (selectedRows.length > 0) {
@@ -214,6 +224,14 @@ class Page extends Component {
     });
   }
 
+  handleChangeProjectOwner = (event, index, value) => {
+    let project = this.state.project;
+    project.owner = value;
+    this.setState({
+      project: project
+    });
+  }
+
   render() {
     const projects = this.state.projects || [];
     const dialogType = this.state.dialogType;
@@ -240,74 +258,89 @@ class Page extends Component {
     return (
       <div className="ProjectsPage">
         <Header />
-        <div className="ProjectsPage-container">
-          <Table
-            height={this.state.height}
-            fixedHeader={this.state.fixedHeader}
-            fixedFooter={this.state.fixedFooter}
-            selectable={this.state.selectable}
-            multiSelectable={this.state.multiSelectable}
-            onRowSelection={this.handleRowSelection}>
-            <TableHeader enableSelectAll={this.state.enableSelectAll}>
-              <TableRow>
-                <TableHeaderColumn>项目</TableHeaderColumn>
-                <TableHeaderColumn>简介</TableHeaderColumn>
-                <TableHeaderColumn>地址</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody
-              deselectOnClickaway={this.state.deselectOnClickaway}
-              showRowHover={this.state.showRowHover}
-              stripedRows={this.state.stripedRows}>
-              {
-                projects.map(project => {
-                  return (
-                    <TableRow key={project._id} selected={project.selected}>
-                      <TableRowColumn>{project.name}</TableRowColumn>
-                      <TableRowColumn>{project.description}</TableRowColumn>
-                      <TableRowColumn>{project.baseUrl}</TableRowColumn>
-                    </TableRow>
-                  )
-                })
-              }
-            </TableBody>
-          </Table>
-          <FlatButton label="新建" secondary={true} onTouchTap={this.showCreateProjectDialog} disabled={this.state.selectedProjectIndex >= 0} />
-          <FlatButton label="编辑"                   onTouchTap={this.showUpdateProjectDialog} disabled={this.state.selectedProjectIndex === -1}/>
-          <FlatButton label="删除" primary={true}   onTouchTap={this.removeProject} disabled={this.state.selectedProjectIndex === -1}/>
+        {
+          window.isAuthenticated ?
+            <div className="ProjectsPage-container">
+              <Table
+                height={this.state.height}
+                fixedHeader={this.state.fixedHeader}
+                fixedFooter={this.state.fixedFooter}
+                selectable={this.state.selectable}
+                multiSelectable={this.state.multiSelectable}
+                onRowSelection={this.handleRowSelection}>
+                <TableHeader enableSelectAll={this.state.enableSelectAll}>
+                  <TableRow>
+                    <TableHeaderColumn>项目</TableHeaderColumn>
+                    <TableHeaderColumn>简介</TableHeaderColumn>
+                    <TableHeaderColumn>地址</TableHeaderColumn>
+                    <TableHeaderColumn>负责人</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody
+                  deselectOnClickaway={this.state.deselectOnClickaway}
+                  showRowHover={this.state.showRowHover}
+                  stripedRows={this.state.stripedRows}>
+                  {
+                    projects.map(project => {
+                      const ownerIndex = _.findIndex(window.users, {_id: project.owner});
+                      const ownerName = window.users[ownerIndex].name;
+                      return (
+                        <TableRow key={project._id} selected={project.selected} selectable={project.owner === window.user._id}>
+                          <TableRowColumn>{project.name}</TableRowColumn>
+                          <TableRowColumn>{project.description}</TableRowColumn>
+                          <TableRowColumn>{project.baseUrl}</TableRowColumn>
+                          <TableRowColumn>{ownerName}</TableRowColumn>
+                        </TableRow>
+                      )
+                    })
+                  }
+                </TableBody>
+              </Table>
+              <FlatButton label="新建" secondary={true} onTouchTap={this.showCreateProjectDialog} disabled={this.state.selectedProjectIndex >= 0} />
+              <FlatButton label="编辑"                   onTouchTap={this.showUpdateProjectDialog} disabled={this.state.selectedProjectIndex === -1}/>
+              <FlatButton label="删除" primary={true}   onTouchTap={this.removeProject} disabled={this.state.selectedProjectIndex === -1}/>
 
-          <Dialog
-            title={label}
-            actions={customActions}
-            autoScrollBodyContent={true}
-            open={this.state.showProjectDialog}
-            onRequestClose={this.closeProjectDialog}>
-            <div>
-              <TextField ref="name" floatingLabelText="名字" hintText="buluo" fullWidth={true} defaultValue={this.state.project.name} onChange={this.handleChangeProject.bind(this, 'name')} disabled={this.state.dialogType==='update'}/>
+              <Dialog
+                title={label}
+                actions={customActions}
+                autoScrollBodyContent={true}
+                open={this.state.showProjectDialog}
+                onRequestClose={this.closeProjectDialog}>
+                <div>
+                  <TextField ref="name" floatingLabelText="名字" hintText="buluo" fullWidth={true} defaultValue={this.state.project.name} onChange={this.handleChangeProject.bind(this, 'name')} disabled={this.state.dialogType==='update'}/>
+                </div>
+                <div>
+                  <TextField ref="description" floatingLabelText="简介" hintText="兴趣部落" fullWidth={true} defaultValue={this.state.project.description} onChange={this.handleChangeProject.bind(this, 'description')} />
+                </div>
+                <div>
+                  <TextField ref="baseUrl" floatingLabelText="基础路径" hintText="http://buluo.qq.com/huodong/" fullWidth={true} defaultValue={this.state.project.baseUrl} onChange={this.handleChangeProject.bind(this, 'baseUrl')} />
+                </div>
+                <div>
+                  <SelectField floatingLabelText="负责人" value={this.state.project.owner} onChange={this.handleChangeProjectOwner}>
+                    {
+                      window.users && window.users.map((user) => {
+                        return <MenuItem value={user._id} key={user._id} primaryText={user.name} />
+                      })
+                    }
+                  </SelectField>
+                </div>
+                <div>
+                  <TextField ref="publishIp" floatingLabelText="发布IP" hintText="10.11.22.33" fullWidth={true} defaultValue={this.state.project.publishIp} onChange={this.handleChangeProject.bind(this, 'publishIp')} />
+                </div>
+                <div>
+                  <TextField ref="publishPath" floatingLabelText="发布路径" hintText="/data/sites/buluo.qq.com/huodong/" fullWidth={true} defaultValue={this.state.project.publishPath} onChange={this.handleChangeProject.bind(this, 'publishPath')} />
+                </div>
+                <div>
+                  <TextField ref="rsyncUsername" floatingLabelText="rsync用户" hintText="user4rsync" fullWidth={true} defaultValue={this.state.project.rsyncUsername} onChange={this.handleChangeProject.bind(this, 'rsyncUsername')} />
+                </div>
+                <div>
+                  <TextField ref="rsyncPassword" floatingLabelText="rsync密码" hintText="pass4rsync" fullWidth={true} defaultValue={this.state.project.rsyncPassword} onChange={this.handleChangeProject.bind(this, 'rsyncPassword')} />
+                </div>
+              </Dialog>
             </div>
-            <div>
-              <TextField ref="description" floatingLabelText="简介" hintText="兴趣部落" fullWidth={true} defaultValue={this.state.project.description} onChange={this.handleChangeProject.bind(this, 'description')} />
-            </div>
-            <div>
-              <TextField ref="baseUrl" floatingLabelText="基础路径" hintText="http://buluo.qq.com/huodong/" fullWidth={true} defaultValue={this.state.project.baseUrl} onChange={this.handleChangeProject.bind(this, 'baseUrl')} />
-            </div>
-            <div>
-              <TextField ref="owner" floatingLabelText="负责人" hintText="felixqslai" fullWidth={true} defaultValue={this.state.project.owner} onChange={this.handleChangeProject.bind(this, 'owner')} />
-            </div>
-            <div>
-              <TextField ref="publishIp" floatingLabelText="发布IP" hintText="10.11.22.33" fullWidth={true} defaultValue={this.state.project.publishIp} onChange={this.handleChangeProject.bind(this, 'publishIp')} />
-            </div>
-            <div>
-              <TextField ref="publishPath" floatingLabelText="发布路径" hintText="/data/sites/buluo.qq.com/huodong/" fullWidth={true} defaultValue={this.state.project.publishPath} onChange={this.handleChangeProject.bind(this, 'publishPath')} />
-            </div>
-            <div>
-              <TextField ref="rsyncUsername" floatingLabelText="rsync用户" hintText="user4rsync" fullWidth={true} defaultValue={this.state.project.rsyncUsername} onChange={this.handleChangeProject.bind(this, 'rsyncUsername')} />
-            </div>
-            <div>
-              <TextField ref="rsyncPassword" floatingLabelText="rsync密码" hintText="pass4rsync" fullWidth={true} defaultValue={this.state.project.rsyncPassword} onChange={this.handleChangeProject.bind(this, 'rsyncPassword')} />
-            </div>
-          </Dialog>
-        </div>
+            : <LoginTips />
+        }
+
         <Footer />
       </div>
     );

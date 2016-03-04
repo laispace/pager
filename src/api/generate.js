@@ -7,7 +7,7 @@ import Html from '../components/PublishPage/html';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import fs from '../utils/fs';
-import { compileComponent, compileTemplate } from '../utils/compile';
+import { compileTemplate } from '../utils/compile';
 const router = new Router();
 
 const findOnePage = (pageId) => new Promise((resolve, reject) => {

@@ -29,9 +29,9 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    // const data = await compileComponent(req.body.project, req.body.name);
+    // re compile
+    await compileComponent (req.body.project, req.body.name);
     const exists = await Component.checkExistsByProjectAndName(req.body.project, req.body.name);
-
     if (exists) {
       const affectedComponent = await Component.findOneAndUpdate({
         project: req.body.project,
@@ -62,7 +62,6 @@ router.post('/', async (req, res, next) => {
         exists: exists
       });
     }
-
   } catch (err) {
     next(err);
   }

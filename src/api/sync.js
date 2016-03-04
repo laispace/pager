@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import http from '../core/HttpClient';
-import {jsonServerUrl} from '../config';
 import { getTemplates, getComponents } from '../utils/resources';
 const router = new Router();
 

@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
   description: String,
   components: [Schema.Types.Mixed],
   project: String,
+  owner: String,
   config: Object
 });
 

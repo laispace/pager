@@ -11,6 +11,12 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import Divider from 'material-ui/lib/menus/menu-divider';
 import SelectField from 'material-ui/lib/select-field';
 
+const emptyPage = {
+  name: '',
+  description: '',
+  project: '',
+  owner: ''
+};
 
 import withStyles from '../../decorators/withStyles';
 import withViewport from '../../decorators/withViewport';
@@ -40,13 +46,7 @@ class Page extends Component {
 
 
       dialogType: 'create', // create/update
-      page: {
-        name: '1',
-        description: '2',
-        project: 'buluo'
-      },
-
-      value: 2
+      page: emptyPage
     };
     this.getProjects();
     this.getPages();
@@ -94,13 +94,13 @@ class Page extends Component {
 
 
   showCreatePageDialog = () => {
-    const page = this.state.page;
-    page.name = '';
-    page.description = '';
-    page.project = '';
+    // set default owner to current user
+    if (window.user) {
+      emptyPage.owner = window.user._id;
+    }
     this.setState({
       dialogType: 'create',
-      page: page
+      page: emptyPage
     });
     this.showPageDialog();
   }
@@ -127,11 +127,6 @@ class Page extends Component {
   }
 
   createPage = async () => {
-    const data = {
-      name: this.state.page.name,
-      description: this.state.page.description,
-      project: this.state.page.project
-    };
     try {
       const res = await fetch('/api/pages', {
         method: 'post',
@@ -139,7 +134,7 @@ class Page extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(this.state.page)
       });
       const json = await res.json();
       if (json.retcode === 0) {
@@ -166,7 +161,9 @@ class Page extends Component {
       name: this.state.page.name,
       description: this.state.page.description,
       project: this.state.page.project,
+      owner: this.state.page.owner
     };
+    console.log(data);
     try {
       const res = await fetch('/api/pages/' + _id, {
         method: 'put',
@@ -203,7 +200,11 @@ class Page extends Component {
       const selectedPageId = selectedPage._id;
       try {
         const res = await fetch(`/api/pages/${selectedPageId}`, {
-          method: 'delete'
+          method: 'delete',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         });
         const json = await res.json();
         if (json.retcode === 0) {
@@ -245,20 +246,26 @@ class Page extends Component {
     }
   }
 
-  handleChangePage = () => {
-    const page = {
-      name: this.refs.name.getValue(),
-      description: this.refs.description.getValue(),
-      // project: this.refs.project.getValue(),
-    };
+  handleChangePage = (key) => {
+    let page = this.state.page;
+    page[key] = this.refs[key].getValue();
     this.setState({
       page: page
     });
   }
 
-  handleChangePageProject = (project) => {
+
+  handleChangePageProject = (event, index, value) => {
     let page = this.state.page;
-    page.project = project;
+    page.project = value;
+    this.setState({
+      page: page
+    });
+  }
+
+  handleChangePageOwner = (event, index, value) => {
+    let page = this.state.page;
+    page.owner = value;
     this.setState({
       page: page
     });
@@ -311,6 +318,7 @@ class Page extends Component {
                 <TableHeaderColumn>名称</TableHeaderColumn>
                 <TableHeaderColumn>简介</TableHeaderColumn>
                 <TableHeaderColumn>项目</TableHeaderColumn>
+                <TableHeaderColumn>负责人</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody
@@ -319,13 +327,16 @@ class Page extends Component {
               stripedRows={this.state.stripedRows}>
               {
                 pages.map(page => {
+                  const ownerIndex = _.findIndex(window.users, {_id: page.owner});
+                  const ownerName = window.users[ownerIndex].name;
                   return (
-                    <TableRow key={page._id} selected={page.selected}>
+                    <TableRow key={page._id} selected={page.selected} selectable={page.owner === window.user._id}>
                       <TableRowColumn>
                         <Link to={ '/pages/' + page._id } onClick={Link.handleClick}>{page.name}</Link>
                       </TableRowColumn>
                       <TableRowColumn>{page.description}</TableRowColumn>
                       <TableRowColumn>{page.project}</TableRowColumn>
+                      <TableRowColumn>{ownerName}</TableRowColumn>
                     </TableRow>
                   )
                 })
@@ -344,20 +355,29 @@ class Page extends Component {
 
             <form action="#">
               <div>
-                页面名称: <TextField ref="name" defaultValue={this.state.page.name} onChange={this.handleChangePage} hintText="name"/>
+                页面名称: <TextField ref="name" defaultValue={this.state.page.name} onChange={this.handleChangePage.bind(this, 'name')} hintText="name"/>
               </div>
               <div>
-                页面简介: <TextField ref="description" defaultValue={this.state.page.description} onChange={this.handleChangePage}
+                页面简介: <TextField ref="description" defaultValue={this.state.page.description} onChange={this.handleChangePage.bind(this, 'description')}
 hintText="description" />
               </div>
               <div>
                 归属项目:
-                <SelectField hintText="project"value={this.state.page.project}>
+                <SelectField hintText="project" value={this.state.page.project} onChange={this.handleChangePageProject}>
                   {
                     projects.map((project) => {
                       return (
-                        <MenuItem value={project.name} key={project.name} primaryText={project.name} onClick={this.handleChangePageProject.bind(this, project.name)}/>
+                        <MenuItem value={project.name} key={project.name} primaryText={project.name} />
                       )
+                    })
+                  }
+                </SelectField>
+              </div>
+              <div>
+                <SelectField floatingLabelText="负责人" value={this.state.page.owner} onChange={this.handleChangePageOwner}>
+                  {
+                    window.users && window.users.map((user) => {
+                      return <MenuItem value={user._id} key={user._id} primaryText={user.name} />
                     })
                   }
                 </SelectField>

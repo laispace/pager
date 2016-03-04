@@ -1,0 +1,55 @@
+.PagePage {
+  padding-bottom: 64px; }
+  .PagePage a,
+  .PagePage span {
+    vertical-align: middle; }
+  .PagePage .resizable-box {
+    position: relative; }
+  .PagePage .page-name {
+    text-align: center; }
+  .PagePage .page-components,
+  .PagePage .preview-iframe {
+    margin: 20px auto 0;
+    width: 414px;
+    height: 736px;
+    overflow: auto;
+    box-sizing: content-box;
+    border-width: 30px 15px 60px 15px;
+    border-color: #ccc;
+    border-style: solid;
+    border-radius: 20px; }
+    .PagePage .page-components .component,
+    .PagePage .preview-iframe .component {
+      cursor: pointer;
+      opacity: 0.5;
+      outline: 1px solid lightblue; }
+      .PagePage .page-components .component.editing,
+      .PagePage .preview-iframe .component.editing {
+        opacity: 1;
+        outline: 1px solid deepskyblue; }
+  .PagePage .all-components .component {
+    position: relative;
+    outline: 1px solid pink; }
+    .PagePage .all-components .component .add-component-btn-wrap {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: none; }
+    .PagePage .all-components .component:hover .add-component-btn-wrap {
+      display: block; }
+
+.page-actions {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: #00bcd4;
+  min-height: 64px;
+  padding: 12px; }
+  .page-actions > div {
+    margin-right: 10px; }
+
+#editor-holder {
+  overflow-y: auto; }
+
+/*# sourceMappingURL=style.css.map */

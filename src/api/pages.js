@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import http from '../core/HttpClient';
-import {jsonServerUrl} from '../config';
 import Page from '../models/page';
 import Component from '../models/component';
 import path from 'path';
@@ -32,6 +31,7 @@ router.post('/', async (req, res, next) => {
         name: req.body.name,
         description: req.body.description,
         project: req.body.project,
+        owner: req.body.owner,
         components: req.body.components,
         config: {
           "props": {
@@ -179,6 +179,7 @@ router.put('/:_id', async (req, res, next) => {
       name: req.body.name,
       description: req.body.description,
       project: req.body.project,
+      owner: req.body.owner,
       components: req.body.components,
       config: req.body.config
     };

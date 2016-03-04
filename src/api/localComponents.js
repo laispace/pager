@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import path from 'path';
-import {jsonServerUrl} from '../config';
 import Component from '../models/component';
 import { getComponent, getComponents } from '../utils/resources';
 import { compileComponent } from '../utils/compile';

@@ -64,7 +64,11 @@ class Page extends Component {
       const selectedComponentId = selectedComponent._id;
       try {
         const res = await fetch(`/api/components/${selectedComponentId}`, {
-          method: 'delete'
+          method: 'delete',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         });
         const json = await res.json();
         if (json.retcode === 0) {

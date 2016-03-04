@@ -1,0 +1,11 @@
+.HomePage img {
+  max-width: 100%; }
+.HomePage .container {
+  background: url("../../public/pager.png") center center no-repeat;
+  background-size: contain; }
+  .HomePage .container .action-btn {
+    position: absolute;
+    top: 50%;
+    right: 50%; }
+
+/*# sourceMappingURL=style.css.map */
