@@ -26,7 +26,7 @@ $ sudo mongod
 $ mongo
 ```
 ```
-use products
+use pager
 db.createUser(
    {
      user: "pager",
