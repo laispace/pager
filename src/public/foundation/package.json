@@ -29,7 +29,7 @@
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "http://registry.npm.taobao.org/foundation-sites/download/foundation-sites-5.5.3.tgz",
+  "_resolved": "https://registry.npmmirror.com/foundation-sites/download/foundation-sites-5.5.3.tgz",
   "_shasum": "6556eb2b31cde3b226630116bd215d95d056c0a7",
   "_shrinkwrap": null,
   "_spec": "foundation-sites@5.5.3",
@@ -79,7 +79,7 @@
     "noattachment": false,
     "shasum": "6556eb2b31cde3b226630116bd215d95d056c0a7",
     "size": 1348085,
-    "tarball": "http://registry.npm.taobao.org/foundation-sites/download/foundation-sites-5.5.3.tgz"
+    "tarball": "https://registry.npmmirror.com/foundation-sites/download/foundation-sites-5.5.3.tgz"
   },
   "gitHead": "b879716aa268e1f88fe43de98db2db4487af00ca",
   "homepage": "https://github.com/zurb/foundation",

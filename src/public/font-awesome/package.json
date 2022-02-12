@@ -29,7 +29,7 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "http://registry.npm.taobao.org/font-awesome/download/font-awesome-4.5.0.tgz",
+  "_resolved": "https://registry.npmmirror.com/font-awesome/download/font-awesome-4.5.0.tgz",
   "_shasum": "1e9d7ccf7d63bdbe57000e18d5188cb2557e70f8",
   "_shrinkwrap": null,
   "_spec": "font-awesome",
@@ -64,7 +64,7 @@
     "noattachment": false,
     "shasum": "1e9d7ccf7d63bdbe57000e18d5188cb2557e70f8",
     "size": 555317,
-    "tarball": "http://registry.npm.taobao.org/font-awesome/download/font-awesome-4.5.0.tgz"
+    "tarball": "https://registry.npmmirror.com/font-awesome/download/font-awesome-4.5.0.tgz"
   },
   "engines": {
     "node": ">=0.10.3"
